@@ -1,5 +1,56 @@
-const add = (num1, num2) => num1 + num2;
-test("add takes two numbers and return a sum", () => {
-  const result = add(1, 2);
-  expect(result).toBe(3);
+import { jest } from "@jest/globals";
+
+jest.unstable_mockModule("../src/db.js", () => ({
+  // return spy
+  insertDB: jest.fn(),
+  getDB: jest.fn(),
+  saveDB: jest.fn(),
+}));
+
+// dynamic import / async import
+const { insertDB, getDB, saveDB } = await import("../src/db.js");
+const { newNote, getAllNotes, removeNote } = await import("../src/notes");
+
+// beforeEach function will run before each test
+// each test must has its own fresh state (stateless) so each test won't be affected by previous mock
+beforeEach(() => {
+  insertDB.mockClear();
+  getDB.mockClear();
+  saveDB.mockClear();
+});
+
+test("newNote inserts data and return it", async () => {
+  const note = "test note";
+  const tags = ["tag1", "tag2", "tag3"];
+  const data = { tags, content: note, id: Date.now() };
+  insertDB.mockResolvedValue(data);
+
+  const result = await newNote(note, tags);
+
+  // toEqual is not a deep check
+  // toEqual is checking if expect and actual have the same properties, not the same values in memory
+  expect(result).toEqual(data);
+});
+
+test("getAllNotes returns all notes", async () => {
+  const db = {
+    notes: ["note1", "note2", "note3"],
+  };
+  getDB.mockResolvedValue(db);
+
+  const result = await getAllNotes();
+  expect(result).toEqual(db.notes);
+});
+
+test("removeNote does nothing if id is not found", async () => {
+  const notes = [
+    { id: 1, content: "note 1" },
+    { id: 2, content: "note 2" },
+    { id: 3, content: "note 3" },
+  ];
+  saveDB.mockResolvedValue(notes);
+
+  const idToRemove = 4;
+  const result = await removeNote(idToRemove);
+  expect(result).toBeUndefined();
 });

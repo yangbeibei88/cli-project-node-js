@@ -76,7 +76,11 @@ yargs(hideBin(process.argv)) // remove first two paths from the beginning of the
     },
     async (argv) => {
       const id = await removeNote(argv.id);
-      console.log(`Note ${id} is deleted!`);
+      if (argv.id) {
+        console.log(`Note ${id} is deleted!`);
+      } else {
+        console.log(`Note ${id} not found!`);
+      }
     }
   )
   .command(
