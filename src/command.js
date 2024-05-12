@@ -7,6 +7,7 @@ import {
   removeAllNotes,
   removeNote,
 } from "./notes.js";
+import { start } from "./server.js";
 
 const listNotes = (notes) => {
   notes.forEach(({ id, content, tags }) => {
@@ -31,7 +32,7 @@ yargs(hideBin(process.argv)) // remove first two paths from the beginning of the
       });
     },
     async (argv) => {
-      const tags = argv.tags ? argv.tags.split(",") : null;
+      const tags = argv.tags ? argv.tags.split(",") : [];
       const note = await newNote(argv.note, tags);
       console.log(`Note ${note.id} Added!`, note);
     }
@@ -89,11 +90,14 @@ yargs(hideBin(process.argv)) // remove first two paths from the beginning of the
     (yargs) => {
       return yargs.positional("port", {
         describe: "port to bind on",
-        default: 5000,
+        default: 4000,
         type: "number",
       });
     },
-    async (argv) => {}
+    async (argv) => {
+      const notes = await getAllNotes();
+      start(notes, argv.port);
+    }
   )
   .command(
     "clean",

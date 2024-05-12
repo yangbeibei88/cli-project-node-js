@@ -1,3 +1,37 @@
 {
-  "notes": []
+  "notes": [
+    {
+      "tags": [
+        "daily",
+        "routine"
+      ],
+      "id": 1715554549194,
+      "content": "walk my dog"
+    },
+    {
+      "tags": [
+        "study",
+        "coding",
+        "backend",
+        "javascript"
+      ],
+      "id": 1715554615353,
+      "content": "learn node js"
+    },
+    {
+      "tags": [
+        "hobbie"
+      ],
+      "id": 1715554675793,
+      "content": "learn chess"
+    },
+    {
+      "tags": [
+        "grocery",
+        "shopping"
+      ],
+      "id": 1715554706185,
+      "content": "grocery shopping"
+    }
+  ]
 }

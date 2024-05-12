@@ -1,10 +1,10 @@
 {
-  "name": "intro-node",
+  "name": "cli-project-node",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "note": "./index.js"
+    "anote": "index.js"
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
@@ -12,11 +12,23 @@
   "keywords": [],
   "author": "Beibei Yang",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "open": "^10.1.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
     "jest": "^29.7.0"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangbeibei88/cli-project-node-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yangbeibei88/cli-project-node-js/issues"
+  },
+  "homepage": "https://github.com/yangbeibei88/cli-project-node-js#readme",
+  "description": ""
 }
