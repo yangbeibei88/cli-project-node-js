@@ -1,0 +1,19 @@
+{
+  "name": "intro-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "note": "./index.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Beibei Yang",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
+}
